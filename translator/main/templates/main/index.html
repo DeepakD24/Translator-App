@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Translator App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            background-color: #eef;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Translator</h2>
+
+        <input type="text" name="translate" placeholder="Enter text" value="{{ input_text }}" required>
+
+        <select name="language" required>
+            <option value="">Select Language</option>
+            <option value="Hindi" {% if request.POST.language == "Hindi" %}selected{% endif %}>Hindi</option>
+            <option value="Kannada" {% if request.POST.language == "Kannada" %}selected{% endif %}>Kannada</option>
+            <option value="Tamil" {% if request.POST.language == "Tamil" %}selected{% endif %}>Tamil</option>
+            <option value="German" {% if request.POST.language == "German" %}selected{% endif %}>German</option>
+            <option value="Telugu" {% if request.POST.language == "Telugu" %}selected{% endif %}>Telugu</option>
+            <option value="Malayalam" {% if request.POST.language == "Malayalam" %}selected{% endif %}>Malayalam</option>
+        </select>
+
+        <button type="submit">Translate</button>
+
+        <!--{% if result %}-->
+            <div class="output">
+                Translated Text: {{ result }}
+            </div>
+        <!--{% endif %}-->
+    </form>
+</body>
+</html>
